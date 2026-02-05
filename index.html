@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi San Valentín?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --rosa-fondo: #fce4ec;
+            --rojo-texto: #8d2b3d;
+            --rojo-boton: #e91e63;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--rosa-fondo);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        /* --- CUPIDOS --- */
+        .cupido {
+            position: fixed;
+            top: 20px;
+            width: 150px; /* Ajusta el tamaño aquí */
+            height: 150px;
+            z-index: 10;
+            /* MODIFICACIÓN: Para quitar lo negro, borra 'background-color' y cambia por 'transparent' */
+            background-color: transparent; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cupido-izq { left: 20px; }
+        .cupido-der { right: 20px; }
+
+        .cupido img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .card {
+            background-color: white;
+            width: 90%;
+            max-width: 400px;
+            padding: 40px 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* --- FUENTE ROMÁNTICA --- */
+        .main-question {
+            font-family: 'Great Vibes', cursive; /* Fuente elegante */
+            font-size: 3rem; /* Más grande porque es cursiva */
+            color: var(--rojo-boton);
+            margin: 20px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+            position: relative;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 50px;
+            border: 2px solid var(--rojo-boton);
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            font-size: 1rem;
+        }
+
+        #btn-si {
+            background-color: white;
+            color: var(--rojo-boton);
+            z-index: 10;
+        }
+
+        #btn-no {
+            background-color: transparent;
+            color: var(--rojo-boton);
+            z-index: 5;
+        }
+
+        #fireworks {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.9);
+            z-index: 9999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <audio id="musica-sorpresa" loop>
+        <source src="bruno.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="cupido cupido-izq">
+        <img src="img/cupi.svg" alt=""> 
+    </div>
+    
+    <div class="cupido cupido-der">
+        <img src="img/cupi.svg" alt="">
+    </div>
+
+    <div class="card">
+        <h2 style="color:#e91e63">La gran pregunta</h2>
+        <p>
+            Muy buen día, mi cielo. Hoy quiero escribirte con todo mi corazón y con la intención de hacerte una cordial invitación. Me haría muy feliz que este 14 de febrero seas mi San Valentín. No solo por la fecha, sino porque compartir este día contigo lo hace especial. Asi que te pregunto :
+        </p>
+
+        <div class="main-question">¿Quieres ser mi San Valentín?</div>
+
+        <div class="buttons-container">
+            <button class="btn" id="btn-si">SÍ, POR SUPUESTO</button>
+            <button class="btn" id="btn-no">NO</button>
+        </div>
+    </div>
+
+    <div id="fireworks">
+        <h1 style="color: #e91e63; font-family: 'Great Vibes', cursive; font-size: 4rem;">¡sabia que dirias que si!</h1>
+        <img src="img/ofdnkc.gif" alt="Fuegos artificiales" style="max-width: 80%;">
+    </div>
+
+    <script>
+        const btnSi = document.getElementById('btn-si');
+        const btnNo = document.getElementById('btn-no');
+        const fireworks = document.getElementById('fireworks');
+        
+        let escalaSi = 1;
+
+        btnNo.addEventListener('click', () => {
+            escalaSi += 0.6;
+            btnSi.style.transform = `scale(${escalaSi})`;
+
+            if (escalaSi > 4) {
+                btnSi.style.position = "fixed";
+                btnSi.style.top = "0";
+                btnSi.style.left = "0";
+                btnSi.style.width = "100vw";
+                btnSi.style.height = "100vh";
+                btnSi.style.display = "flex";
+                btnSi.style.justifyContent = "center";
+                btnSi.style.alignItems = "center";
+                btnSi.style.fontSize = "3rem";
+                btnSi.style.zIndex = "1000";
+                btnSi.style.borderRadius = "0";
+            }
+        });
+
+                // Seleccionamos el audio
+        const musica = document.getElementById('musica-sorpresa');
+
+        btnSi.addEventListener('click', () => {
+            // 1. Iniciamos la música
+            musica.play(); 
+            
+            // 2. Mostramos los fuegos artificiales (el div que ya tenías)
+            fireworks.style.display = 'flex';
+        });
+    </script>
+</body>
+</html> 
